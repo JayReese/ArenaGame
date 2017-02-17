@@ -46,6 +46,14 @@ namespace PlayerControl
                 transform.RotateAround(PlayerCharacter.transform.position, Vector3.up, CameraLookSensitivity * CameraHorizontalMovement);
 
             CurrentCameraRotation = transform.rotation;
+
+            RotateCharacter();
+        }
+
+        void RotateCharacter()
+        {
+            if(PlayerCharacter.GetComponent<PlayerMovement>())
+                PlayerCharacter.GetComponent<PlayerMovement>().Orient();
         }
 
         void SetDefaults()

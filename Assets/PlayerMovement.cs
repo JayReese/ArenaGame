@@ -26,9 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
         Move();
-        OrientCharacter();
     }
 
     void Move()
@@ -36,13 +34,17 @@ public class PlayerMovement : MonoBehaviour
         transform.position += (Camera.main.transform.forward * VerticalMovement) * Time.fixedDeltaTime * MovementSpeed;
     }
 
-    private void OrientCharacter()
+    public void Orient()
     {
-        if(VerticalMovement > 0)
-            transform.rotation = new Quaternion(transform.rotation.x, Camera.main.transform.rotation.y, transform.rotation.z, transform.rotation.w);
+        //if(VerticalMovement > 0)
+        //    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y + 90, transform.localEulerAngles.z);
 
-        //if (transform.rotation.y >= 178)
-        //    transform.rotation = new Quaternion(transform.rotation.x, 0, transform.rotation.z, transform.rotation.z);
+        ////if (transform.rotation.y >= 178)
+        ////    transform.rotation = new Quaternion(transform.rotation.x, 0, transform.rotation.z, transform.rotation.z);
+
+        //transform.rotation = camRot;
+
+        transform.LookAt(-Camera.main.transform.position);
     }
 
     void CreateAxisOrientation()
