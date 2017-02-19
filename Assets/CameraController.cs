@@ -42,18 +42,19 @@ namespace PlayerControl
 
         void RotateCamera()
         {
-            if (CameraHorizontalMovement != 0)
-                transform.RotateAround(PlayerCharacter.transform.position, Vector3.up, CameraLookSensitivity * CameraHorizontalMovement);
+            //if (CameraHorizontalMovement != 0)
+            //    transform.RotateAround(PlayerCharacter.transform.position, Vector3.up, CameraLookSensitivity * CameraHorizontalMovement);
 
-            CurrentCameraRotation = transform.rotation;
+            //CurrentCameraRotation = transform.rotation;
 
-            RotateCharacter();
+            if(CameraHorizontalMovement != 0)
+                RotateCharacter();
         }
 
         void RotateCharacter()
         {
             if(PlayerCharacter.GetComponent<PlayerMovement>())
-                PlayerCharacter.GetComponent<PlayerMovement>().Orient();
+                PlayerCharacter.GetComponent<PlayerMovement>().Orient(CameraHorizontalMovement, CameraLookSensitivity);
         }
 
         void SetDefaults()

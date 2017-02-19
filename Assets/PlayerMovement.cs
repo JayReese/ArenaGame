@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position += (Camera.main.transform.forward * VerticalMovement) * Time.fixedDeltaTime * MovementSpeed;
     }
 
-    public void Orient()
+    public void Orient(float camHorizontalMove, float camSens)
     {
         //if(VerticalMovement > 0)
         //    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y + 90, transform.localEulerAngles.z);
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
         //transform.rotation = camRot;
 
-        transform.LookAt(-Camera.main.transform.position);
+        transform.Rotate(transform.rotation.x, camHorizontalMove * (Time.fixedDeltaTime * camSens) * 10, transform.rotation.z);
     }
 
     void CreateAxisOrientation()

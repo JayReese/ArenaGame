@@ -5,6 +5,7 @@ using System;
 public class CharacterManager : MonoBehaviour
 {
 
+    [SerializeField] bool PlayersSpawned;
     [SerializeField] GameObject[] Players;
 
 	// Use this for initialization
@@ -13,28 +14,49 @@ public class CharacterManager : MonoBehaviour
         Players = GameObject.FindGameObjectsWithTag("Player");
 
         Cursor.visible = false;
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	    for(int i = 0; i < Players.Length; i++)
-        {
-            if (!Players[i].GetComponent<PlayerMovement>())
-                CorrectCharacter(Players[i], "movement");
-        }
+
+        
 	}
 
-    void CorrectCharacter(GameObject player, string query)
+    private void SpawnPlayer()
     {
-        //Debug.Log("Does not have player movement...");
+        for (int i = 0; i < Players.Length; i++)
+        {
+            for (int a = 0; a < 2; a++)
+            {
+                CorrectCharacter(Players[i], a);
+            }
+
+        }
+
+        PlayersSpawned = true;
+    }
+
+    // Update is called once per frame
+    void Update ()
+    {
+        if (!PlayersSpawned)
+            SpawnPlayer();
+	}
+
+    void CorrectCharacter(GameObject player, int query)
+    {
+        Debug.Log(string.Format("Current query: {0}", query));
 
         switch(query)
         {
-            case "movement":
+            case 0:
                 AssignCharacterMovement(player);
                 break;
+            case 1:
+                AssignCharacterInput(player);
+                break;
         }
+    }
+
+    private void AssignCharacterInput(GameObject player)
+    {
+        player.AddComponent<PlayerInput>();
     }
 
     private void AssignCharacterMovement(GameObject player)
