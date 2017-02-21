@@ -57,7 +57,7 @@ namespace PlayerControl
 
         private void LookVerticallyWithCamera()
         {
-            transform.Rotate(Mathf.Clamp(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, -90, 90), transform.rotation.y, transform.rotation.z);
+            //transform.Rotate(Mathf.Clamp(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, -90, 90), transform.rotation.y, 0);
         }
 
         void RotateCharacter()
