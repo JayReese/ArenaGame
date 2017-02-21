@@ -15,8 +15,8 @@ public class DamageMonitorDuration : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Lifetime <= 0)
-            Lifetime -= Time.deltaTime * 2f;
+        if (Lifetime > 0)
+            Lifetime -= Time.deltaTime * 0.5f;
         else
             Destroy(gameObject);
 	}

@@ -33,7 +33,7 @@ public class CombatManager : MonoBehaviour
         switch(hit.collider.tag.ToLower())
         {
             case "wall":
-                InterfaceManager.GiveDamageReport(hit, mousePos, reportedDamage);
+                InterfaceManager.GiveDamageReport(hit, reportedDamage);
                 break;
         }
     }
