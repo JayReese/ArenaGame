@@ -4,34 +4,23 @@ using System.Collections;
 public class PlayerInput : MonoBehaviour
 {
     DisplayDamage ReportDamage;
+    CombatManager CombatManage;
 
 	// Use this for initialization
 	void Start ()
     {
-	        
+        CombatManage = GameObject.FindGameObjectWithTag("Managers").GetComponent<CombatManager>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         Fire();
-
-        Debug.Log(Input.mousePosition); 
     }
 
     public void Fire()
     {
         if (Input.GetMouseButtonDown(0))
-            EvaluateShot();
-    }
-
-    private void EvaluateShot()
-    {
-        Debug.Log("Shooting");
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.transform.position, transform.forward, out hit))
-            ReportDamage(50);
+            CombatManage.EvaluateShot(25);
     }
 }
