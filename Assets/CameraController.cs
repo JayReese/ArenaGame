@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 namespace PlayerControl
 {
@@ -27,7 +28,7 @@ namespace PlayerControl
         void Update()
         {
             CameraHorizontalMovement = Input.GetAxisRaw("Mouse X");
-            CameraVerticalMovement = Input.GetAxisRaw("Mouse Y");
+            CameraVerticalMovement = Input.GetAxis("Mouse Y");
         }
 
         void FixedUpdate()
@@ -49,6 +50,14 @@ namespace PlayerControl
 
             if(CameraHorizontalMovement != 0)
                 RotateCharacter();
+
+            if (CameraVerticalMovement >= 1 || CameraVerticalMovement <= -1)
+                LookVerticallyWithCamera();
+        }
+
+        private void LookVerticallyWithCamera()
+        {
+            transform.Rotate(Mathf.Clamp(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, -90, 90), transform.rotation.y, transform.rotation.z);
         }
 
         void RotateCharacter()

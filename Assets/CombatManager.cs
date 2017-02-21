@@ -4,6 +4,7 @@ using System.Collections;
 public class CombatManager : MonoBehaviour
 {
     UIManager InterfaceManager;
+    [SerializeField] int testReportedDamage = 500;
 
 	// Use this for initialization
 	void Start ()
@@ -28,12 +29,11 @@ public class CombatManager : MonoBehaviour
     
     private void SendHitInformation(RaycastHit hit, Vector3 mousePos)
     {
-        int reportedDamage = 500;
 
         switch(hit.collider.tag.ToLower())
         {
             case "wall":
-                InterfaceManager.GiveDamageReport(hit, reportedDamage);
+                InterfaceManager.GiveDamageReport(hit, testReportedDamage);
                 break;
         }
     }

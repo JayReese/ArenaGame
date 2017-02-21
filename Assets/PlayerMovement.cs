@@ -36,15 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Orient(float camHorizontalMove, float camSens)
     {
-        //if(VerticalMovement > 0)
-        //    transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Camera.main.transform.localEulerAngles.y + 90, transform.localEulerAngles.z);
-
-        ////if (transform.rotation.y >= 178)
-        ////    transform.rotation = new Quaternion(transform.rotation.x, 0, transform.rotation.z, transform.rotation.z);
-
-        //transform.rotation = camRot;
-
-        transform.Rotate(transform.rotation.x, camHorizontalMove * (Time.fixedDeltaTime * camSens) * 10, transform.rotation.z);
+        transform.Rotate(transform.rotation.x, camHorizontalMove * (Time.fixedDeltaTime * camSens) * 20, transform.rotation.z);
     }
 
     void CreateAxisOrientation()
