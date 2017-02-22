@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
 
     public GameObject TestAbility;
-    public Vector3 AbilityProjectileEmitterPos;
+    public GameObject AbilityProjectileEmitter;
 
     public MovementType Movement;
 
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).tag == "A_Projectile Emitter")
-                AbilityProjectileEmitterPos = transform.GetChild(i).localPosition;
+                AbilityProjectileEmitter = transform.GetChild(i).gameObject;
         }
 	}
 	

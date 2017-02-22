@@ -5,6 +5,7 @@ public class Ability : MonoBehaviour
 {
 
     Vector3 FireDirection;
+    float Strength, Range, Duration, Cooldown;
 
 	// Use this for initialization
 	void Start ()

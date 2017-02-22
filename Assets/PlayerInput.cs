@@ -35,7 +35,7 @@ public class PlayerInput : MonoBehaviour
     private void UseAbility()
     {
         if(AbilityUse)
-            Instantiate(PlayerReference.TestAbility, PlayerReference.AbilityProjectileEmitterPos, Quaternion.identity);
+            Instantiate(PlayerReference.TestAbility, PlayerReference.AbilityProjectileEmitter.transform.position, Quaternion.identity);
     }
 
     private void BindCombatBooleans()
