@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     public void GiveDamageReport(RaycastHit hit, int damageDealt)
     {
-        InterfaceDisplay.CreateDamageDisplay(new Vector3(30, 50, 0), damageDealt);
+        InterfaceDisplay.CreateDamageDisplay(new Vector3(hit.point.x + 30, hit.point.y + 30, 0), damageDealt);
     }
 
     void CreateCrosshair()

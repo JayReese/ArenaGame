@@ -12,7 +12,7 @@ namespace PlayerControl
                                CameraOffsetX, CameraOffsetY, CameraOffsetZ;
         //[SerializeField] Vector3 CameraPositionOffset;
         [SerializeField] GameObject PlayerCharacter;
-        Quaternion CurrentCameraRotation;
+        [SerializeField] Quaternion CurrentCameraRotation;
 
         // Use this for initialization
         void Start()
