@@ -28,7 +28,7 @@ namespace PlayerControl
         void Update()
         {
             CameraHorizontalMovement = Input.GetAxisRaw("Mouse X");
-            CameraVerticalMovement = Input.GetAxis("Mouse Y");
+            CameraVerticalMovement = Input.GetAxisRaw("Mouse Y");
         }
 
         void FixedUpdate()
@@ -43,21 +43,16 @@ namespace PlayerControl
 
         void RotateCamera()
         {
-            //if (CameraHorizontalMovement != 0)
-            //    transform.RotateAround(PlayerCharacter.transform.position, Vector3.up, CameraLookSensitivity * CameraHorizontalMovement);
-
-            //CurrentCameraRotation = transform.rotation;
-
             if(CameraHorizontalMovement != 0)
                 RotateCharacter();
 
-            if (CameraVerticalMovement >= 1 || CameraVerticalMovement <= -1)
+            if (CameraVerticalMovement != 0)
                 LookVerticallyWithCamera();
         }
 
         private void LookVerticallyWithCamera()
         {
-            //transform.Rotate(Mathf.Clamp(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, -90, 90), transform.rotation.y, 0);
+            transform.Rotate(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, 0, 0);
         }
 
         void RotateCharacter()
