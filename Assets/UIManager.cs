@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     {
         DamageMonitor = Resources.Load("Art/UI/Damage Dealt") as GameObject;
         InterfaceDisplay = GameObject.FindGameObjectWithTag("UI").GetComponent<UIDisplay>();
+
+        Cursor.visible = false;
     }
 
     public void GiveDamageReport(RaycastHit hit, int damageDealt)

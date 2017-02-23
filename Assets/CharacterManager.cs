@@ -12,10 +12,6 @@ public class CharacterManager : MonoBehaviour
 	void Start ()
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
-
-        Cursor.visible = false;
-
-        
 	}
 
     private void SpawnPlayer()
@@ -26,9 +22,8 @@ public class CharacterManager : MonoBehaviour
             {
                 CorrectCharacter(Players[i], a);
             }
-
         }
-
+            
         PlayersSpawned = true;
     }
 
@@ -41,8 +36,6 @@ public class CharacterManager : MonoBehaviour
 
     void CorrectCharacter(GameObject player, int query)
     {
-        Debug.Log(string.Format("Current query: {0}", query));
-
         switch(query)
         {
             case 0:

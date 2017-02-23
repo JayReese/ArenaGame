@@ -21,7 +21,8 @@ public class CombatManager : MonoBehaviour
     public void EvaluateShot(float range)
     {
         Vector3 mousePos = Input.mousePosition;
-        RaycastHit hit = RaycastHitTarget(range);
+        //RaycastHit hit = RaycastHitTarget(range);
+        RaycastHit hit = NexusGlobals.RaycastHitTarget(Camera.main.transform.position, Camera.main.transform.forward, range);
 
         if (hit.collider != null)
             SendHitInformation(hit, mousePos);
@@ -29,7 +30,6 @@ public class CombatManager : MonoBehaviour
     
     private void SendHitInformation(RaycastHit hit, Vector3 mousePos)
     {
-
         switch(hit.collider.tag.ToLower())
         {
             case "wall":

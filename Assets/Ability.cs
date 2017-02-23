@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Ability : MonoBehaviour
 {
-
+    
     Vector3 FireDirection;
     [SerializeField] int Strength, Range, Duration, Cooldown;
     [SerializeField] float Lifetime;
@@ -19,26 +19,30 @@ public class Ability : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if(Lifetime > 0)
+        
+	}
+
+    void FixedUpdate()
+    {
+        if (Lifetime > 0)
         {
             Lifetime -= Time.deltaTime * 2f;
             Move();
         }
         else
             Destroy(gameObject);
-	}
-
-    void OnColliderEnter(Collider c)
-    {
-        if(c && c.tag.ToLower() == "wall")
-        {
-            Debug.Log("Object is hit");
-            Destroy(gameObject);
-        }
     }
 
     void Move()
     {
-        transform.position += FireDirection * Time.deltaTime * 30f;
+        transform.position += FireDirection * Time.deltaTime * 40f;
+    }
+
+    void OnTriggerEnter(Collider c)
+    {
+        if (c.tag == "Wall")
+            
+
+        Destroy(gameObject);
     }
 }
