@@ -12,6 +12,8 @@ public class CharacterManager : MonoBehaviour
 	void Start ()
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
+
+        Debug.Log(DatabaseManager.ReturnQueriedData(DataQueryType.Abilities));
 	}
 
     private void SpawnPlayer()

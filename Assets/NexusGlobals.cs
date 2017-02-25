@@ -2,6 +2,7 @@
 using System.Collections;
 
 public enum MovementType { THREEDEG = 1, SIXDEG };
+public enum DataQueryType { Abilities, Weapons };
 
 public static class NexusGlobals
 {

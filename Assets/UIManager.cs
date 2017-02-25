@@ -7,13 +7,11 @@ delegate void DisplayDamage(List<int> damagesDealt);
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject DamageMonitor;
     [SerializeField] UIDisplay InterfaceDisplay;
 
     // Use this for initialization
     void Start()
     {
-        DamageMonitor = Resources.Load("Art/UI/Damage Dealt") as GameObject;
         InterfaceDisplay = GameObject.FindGameObjectWithTag("UI").GetComponent<UIDisplay>();
 
         Cursor.visible = false;

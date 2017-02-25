@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Ability : MonoBehaviour
 {
-    
+
     Vector3 FireDirection;
     [SerializeField] int Strength, Range, Duration, Cooldown;
     [SerializeField] float Lifetime;
+    [SerializeField] List<GameObject> AbilityVisuals;
 
 	// Use this for initialization
 	void Start ()
@@ -14,6 +16,7 @@ public class Ability : MonoBehaviour
         Lifetime = 5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
         FireDirection = Camera.main.transform.forward;
+        AbilityVisuals = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -41,7 +44,7 @@ public class Ability : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         if (c.tag == "Wall")
-            
+            Debug.Log("Well then.");
 
         Destroy(gameObject);
     }
