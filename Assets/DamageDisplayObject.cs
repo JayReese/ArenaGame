@@ -12,6 +12,8 @@ public class DamageDisplayObject : MonoBehaviour
         transform.SetParent(GameObject.FindGameObjectWithTag("UI").transform, false);
         Lifetime = 1.0f;
 
+        Debug.Log("Hi nathan.");
+
         SetDamageNumberColor();
 	}
 	

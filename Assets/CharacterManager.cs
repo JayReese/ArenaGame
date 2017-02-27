@@ -13,7 +13,7 @@ public class CharacterManager : MonoBehaviour
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
 
-        Debug.Log(DatabaseManager.ReturnQueriedData(DataQueryType.Abilities, "Test Ability", "ValidEffects", "Effects").ToString());
+        Debug.Log(DatabaseManager.ReturnQueriedData(DataQueryType.Abilities, "Test Ability", "Stats", "Effects").ToString());
 	}
 
     private void SpawnPlayer()
