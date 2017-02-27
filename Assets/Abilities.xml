@@ -3,5 +3,11 @@
 <AbilityList>
   <Ability Name="Test Ability">
     <Effects ValidEffects="Test Ability Explosion" />
+    <Stats Strength="150" Range="0" Duration=""  />
+  </Ability>
+
+  <Ability Name="Bolt">
+    <Effects ValidEffects="Bolt Explosion" />
+    <Stats Strength="250" Range="25" Duration="40"  />
   </Ability>
 </AbilityList>
