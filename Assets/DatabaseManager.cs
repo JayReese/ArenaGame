@@ -47,9 +47,7 @@ public static class DatabaseManager
             }
         }
 
-        // Should usually return a null if nothing is found. But, that would halt progress, so let's 
-        // return something non-explosion-inducing like... 0. Yeah, zero works.
-        return 0;
+        return null;
     }
 
     // Retrieves everything queried for based on the ability's name.

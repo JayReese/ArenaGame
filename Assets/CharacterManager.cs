@@ -7,13 +7,14 @@ public class CharacterManager : MonoBehaviour
 
     [SerializeField] bool PlayersSpawned;
     [SerializeField] GameObject[] Players;
+    AbilityExecution AbilityExecutor;
 
 	// Use this for initialization
 	void Start ()
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
 
-        Debug.Log(DatabaseManager.ReturnQueriedData(DataQueryType.Abilities, "Test Ability", "Stats", "Effects").ToString());
+        Debug.Log(DatabaseManager.ReturnQueriedData(DataQueryType.Abilities, "Test Ability", "Strength", "Stats").ToString());
 	}
 
     private void SpawnPlayer()

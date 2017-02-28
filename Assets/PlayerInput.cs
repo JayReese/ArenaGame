@@ -8,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     CombatManager CombatManage;
     PlayerMovement MovementReference;
     Player PlayerReference;
+    ControlScheme Controls;
 
     bool AbilityUse;
 

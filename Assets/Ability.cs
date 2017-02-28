@@ -6,7 +6,8 @@ public class Ability : MonoBehaviour
 {
 
     Vector3 FireDirection;
-    [SerializeField] int Strength, Range, Duration, Cooldown;
+    public string Name;
+    public int Strength, Range, Duration, Cooldown;
     [SerializeField] float Lifetime;
     [SerializeField] List<GameObject> AbilityVisuals;
 
