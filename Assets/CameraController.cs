@@ -21,6 +21,8 @@ namespace PlayerControl
             PlayerCharacter = GameObject.FindGameObjectWithTag("Player");
             SetDefaults();
 
+            Debug.Log(string.Format("{0}, {1}, {2}", 1, 1.2, -2.3));
+
             //Debug.Log(transform.parent.transform.localPosition);
         }
 
@@ -36,11 +38,6 @@ namespace PlayerControl
             RotateCamera();
         }
 
-        void LateUpdate()
-        {
-            
-        }
-
         void RotateCamera()
         {
             if(CameraHorizontalMovement != 0)
@@ -52,7 +49,11 @@ namespace PlayerControl
 
         private void LookVerticallyWithCamera()
         {
-            transform.Rotate(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, 0, 0);
+            Debug.Log(transform.rotation);
+
+            if (transform.rotation.x > -0.7f && transform.rotation.x < 0.3f)
+                transform.Rotate(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, 0, 0);
+                
         }
 
         void RotateCharacter()
