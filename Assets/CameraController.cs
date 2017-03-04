@@ -51,7 +51,7 @@ namespace PlayerControl
         {
             Debug.Log(transform.rotation);
 
-            if (transform.rotation.x > -0.7f && transform.rotation.x < 0.3f)
+            if (transform.localRotation.x > -0.7f && transform.localRotation.x < 0.3f)
                 transform.Rotate(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, 0, 0);
                 
         }
@@ -64,9 +64,9 @@ namespace PlayerControl
 
         void SetDefaults()
         {
-            CameraOffsetX = 0.6f;
-            CameraOffsetY = 1.3f;
-            CameraOffsetZ = -2f;
+            CameraOffsetX = 1f;
+            CameraOffsetY = 1.2f;
+            CameraOffsetZ = -2.3f;
         }
     }
 }
