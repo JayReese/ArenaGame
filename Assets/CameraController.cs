@@ -6,6 +6,12 @@ namespace PlayerControl
 {
     public class CameraController : MonoBehaviour
     {
+        /// <summary>
+        ///  Camera controller script, created to serve as the method of controlling the camera.
+        /// </summary>
+        /// 
+        /// Third person camera pos: 1, 1.2, -2.3
+        /// Overhead camera pos: 0, 3, -3.5
 
         [SerializeField] float CameraHorizontalMovement, CameraVerticalMovement,
                                CameraLookSensitivity,
@@ -20,8 +26,6 @@ namespace PlayerControl
             CameraLookSensitivity = 2f;
             PlayerCharacter = GameObject.FindGameObjectWithTag("Player");
             SetDefaults();
-
-            Debug.Log(string.Format("{0}, {1}, {2}", 1, 1.2, -2.3));
 
             //Debug.Log(transform.parent.transform.localPosition);
         }
@@ -49,11 +53,12 @@ namespace PlayerControl
 
         private void LookVerticallyWithCamera()
         {
-            Debug.Log(transform.rotation);
+            //Debug.Log(transform.rotation);
 
-            if (transform.localRotation.x > -0.7f && transform.localRotation.x < 0.3f)
-                transform.Rotate(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, 0, 0);
-                
+            //if (transform.localRotation.x > -0.7f && transform.localRotation.x < 0.3f)
+            //    transform.Rotate(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, 0, 0);
+
+           transform.Rotate(Mathf.Clamp(transform.eulerAngles.x, 10, 30) * -CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity), 0, 0);
         }
 
         void RotateCharacter()
@@ -67,6 +72,31 @@ namespace PlayerControl
             CameraOffsetX = 1f;
             CameraOffsetY = 1.2f;
             CameraOffsetZ = -2.3f;
+
+            transform.localPosition = new Vector3(CameraOffsetX, CameraOffsetY, CameraOffsetZ);
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+
+        float ClampAngle(float angle, float min, float max)
+        {
+            if (angle < 90 || angle > 270)
+            {
+                if (angle > 180)
+                    angle -= 360;
+
+                if (max > 180)
+                    max -= 360;
+
+                if (min > 180)
+                    min -= 360;
+            }
+
+            angle = Mathf.Clamp(angle, min, max);
+
+            if (angle < 0)
+                angle += 360;
+
+            return angle;
         }
     }
 }

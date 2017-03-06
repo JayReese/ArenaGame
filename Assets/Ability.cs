@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Ability : MonoBehaviour
 {
 
-    Vector3 FireDirection;
+    Vector3 FireDirection,
+        EffectReferencePositional;
     public string Name;
     public int Strength, Range, Duration, Cooldown;
     [SerializeField] float Lifetime;
@@ -34,7 +36,7 @@ public class Ability : MonoBehaviour
             Move();
         }
         else
-            Destroy(gameObject);
+            DestroySelf(false, 0);
     }
 
     void Move()
@@ -45,8 +47,27 @@ public class Ability : MonoBehaviour
     void OnTriggerEnter(Collider c)
     {
         if (c.tag == "Wall")
-            Debug.Log("Well then.");
+            Debug.Log("hit wall");
+
+        DestroySelf(true, 1);
+    }
+
+    void DestroySelf(bool contactMade, byte destroyType = 0)
+    {
+        switch(destroyType)
+        {
+            case 1:
+                EffectReferencePositional = transform.position;
+                break;
+        }
+
+        if (contactMade) GenerateEffect();
 
         Destroy(gameObject);
+    }
+
+    private void GenerateEffect()
+    {
+        Instantiate(Resources.Load("Abilities/Test Ability Explosion") as GameObject, EffectReferencePositional, Quaternion.identity);
     }
 }
