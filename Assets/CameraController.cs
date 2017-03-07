@@ -69,8 +69,8 @@ namespace PlayerControl
 
         void SetDefaults()
         {
-            CameraOffsetX = 1f;
-            CameraOffsetY = 1.2f;
+            CameraOffsetX = 0.8f;
+            CameraOffsetY = 1f;
             CameraOffsetZ = -2.3f;
 
             transform.localPosition = new Vector3(CameraOffsetX, CameraOffsetY, CameraOffsetZ);

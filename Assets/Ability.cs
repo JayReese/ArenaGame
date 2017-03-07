@@ -12,14 +12,20 @@ public class Ability : MonoBehaviour
     public int Strength, Range, Duration, Cooldown;
     [SerializeField] float Lifetime;
     [SerializeField] List<GameObject> AbilityVisuals;
+    [SerializeField]
+    AbilityMobility Mobility;
+    [SerializeField]
+    AbilityTarget Target;
 
 	// Use this for initialization
 	void Start ()
     {
         Lifetime = 5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-        FireDirection = Camera.main.transform.forward;
+        FireDirection = transform.forward;
         AbilityVisuals = new List<GameObject>();
+
+        transform.LookAt(new Vector2(0, 0));
 	}
 	
 	// Update is called once per frame
