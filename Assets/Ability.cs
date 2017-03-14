@@ -17,9 +17,12 @@ public class Ability : MonoBehaviour
     [SerializeField]
     AbilityTarget Target;
 
+    
+
 	// Use this for initialization
 	void Start ()
     {
+        
         Lifetime = 5f;
         transform.GetChild(0).GetComponent<Renderer>().enabled = false;
         FireDirection = transform.forward;

@@ -5,10 +5,11 @@ using System;
 public abstract class Weapon : MonoBehaviour
 {
     protected enum FiringType { NONE, SEMIAUTO, AUTO, CHARGE };
-    [SerializeField] protected FiringType FireType; 
-    [SerializeField] protected bool WeaponInUse, IsReloading;
+    [SerializeField] protected FiringType FireType;
+    [SerializeField] protected bool WeaponInUse, IsReloading, WeaponActive;
     [SerializeField] protected float NextFireTime, FireRateModifier;
     [SerializeField] protected WeaponStats Stats;
+    [SerializeField] protected Transform PlayerTransform;
 
 	// Use this for initialization
 	protected void Start ()
@@ -20,13 +21,15 @@ public abstract class Weapon : MonoBehaviour
         else
             FireRateModifier = 1;
 
-        NextFireTime = 1;  
+        NextFireTime = 1;
+
+        PlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 	}
 	
 	// Update is called once per frame
 	protected void Update ()
     {
-        if (WeaponInUse && NextFireTime <= 0 && !IsReloading)
+        if (WeaponInUse && NextFireTime <= 0 && !IsReloading && WeaponActive)
             Use();
         if ((Stats.CurrentMagazineSize == 0 || Input.GetKeyDown(KeyCode.R)) && Stats.CurrentMagazineSize < Stats.MaxMagazineSize && !IsReloading)
             StartCoroutine(Reload());
@@ -39,6 +42,8 @@ public abstract class Weapon : MonoBehaviour
             DecrementNextFire();
         else
             NextFireTime = 0;
+
+        transform.RotateAround(PlayerTransform.position, transform.up, 10);
     }
 
     void Use ()

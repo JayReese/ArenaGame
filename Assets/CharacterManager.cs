@@ -22,9 +22,7 @@ public class CharacterManager : MonoBehaviour
         for (int i = 0; i < Players.Length; i++)
         {
             for (int a = 0; a < 2; a++)
-            {
                 CorrectCharacter(Players[i], a);
-            }
         }
             
         PlayersSpawned = true;

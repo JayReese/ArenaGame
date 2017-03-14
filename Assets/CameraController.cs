@@ -53,11 +53,6 @@ namespace PlayerControl
 
         private void LookVerticallyWithCamera()
         {
-            //Debug.Log(transform.rotation);
-
-            //if (transform.localRotation.x > -0.7f && transform.localRotation.x < 0.3f)
-            //    transform.Rotate(-CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity) * 25, 0, 0);
-
            transform.Rotate(Mathf.Clamp(transform.eulerAngles.x, 10, 30) * -CameraVerticalMovement * (Time.fixedDeltaTime * CameraLookSensitivity), 0, 0);
         }
 

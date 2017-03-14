@@ -7,6 +7,7 @@ public class SemiAutomaticWeapon : Weapon
 	new void Start ()
     {
         FireType = FiringType.SEMIAUTO;
+        WeaponInUse = true;
 
         base.Start();
     }
