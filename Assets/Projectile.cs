@@ -7,7 +7,7 @@ public abstract class Projectile : MonoBehaviour
 
     protected void Start()
     {
-        Speed = 60f;
+        Speed = 10f;
     }
 
     protected void FixedUpdate()
