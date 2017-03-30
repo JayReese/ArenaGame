@@ -21,19 +21,19 @@ public class UIManager : MonoBehaviour
     {
         test = 4;
         InterfaceDisplay = GameObject.FindGameObjectWithTag("UI").GetComponent<UIDisplay>();
-        StatDisplayRenderer = GameObject.FindGameObjectWithTag("UI.StatDisplayBoard").GetComponent<Image>();
-        StatDisplayText = GameObject.FindGameObjectWithTag("UI.StatNumber").GetComponent<Text>();
+        //StatDisplayRenderer = GameObject.FindGameObjectWithTag("UI.StatDisplayBoard").GetComponent<Image>();
+        //StatDisplayText = GameObject.FindGameObjectWithTag("UI.StatNumber").GetComponent<Text>();
 
-        PreallocateDisplayColors();
+        //PreallocateDisplayColors();
 
-        Debug.Log(StatDisplayColorMeanings["Neutral"]);
+        //Debug.Log(StatDisplayColorMeanings["Neutral"]);
 
         Cursor.visible = false;
     }
 
     void Update()
     {
-        CorrectDisplayStat();
+        //CorrectDisplayStat();
     }
 
     public void GiveDamageReport(RaycastHit hit, int damageDealt)

@@ -53,15 +53,15 @@ public class PlayerInput : MonoBehaviour
     void BindMovementBooleans()
     {
         MovementReference.Sprinting = Input.GetKey(KeyCode.LeftShift);
-        GetComponent<Animator>().SetBool("Sprinting", MovementReference.Sprinting);
+        if(GetComponent<Animator>()) GetComponent<Animator>().SetBool("Sprinting", MovementReference.Sprinting);
     }
 
     void CreateAxisOrientation()
     {
         MovementReference.VerticalMovement = Input.GetAxisRaw("Vertical");
-        GetComponent<Animator>().SetFloat("VerticalMove", MovementReference.VerticalMovement);
+        if(GetComponent<Animator>()) GetComponent<Animator>().SetFloat("VerticalMove", MovementReference.VerticalMovement);
 
         MovementReference.HorizontalMovement = Input.GetAxisRaw("Horizontal");
-        GetComponent<Animator>().SetFloat("HorizontalMove", MovementReference.HorizontalMovement);
+        if(GetComponent<Animator>()) GetComponent<Animator>().SetFloat("HorizontalMove", MovementReference.HorizontalMovement);
     }
 }
