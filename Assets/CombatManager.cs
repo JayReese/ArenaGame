@@ -18,17 +18,18 @@ public class CombatManager : MonoBehaviour
 	    
 	}
 
+    // For hitscan shots.
     public void EvaluateShot(float range)
     {
-        Vector3 mousePos = Input.mousePosition;
+        //Vector3 mousePos = Input.mousePosition;
         //RaycastHit hit = RaycastHitTarget(range);
         RaycastHit hit = NexusGlobals.RaycastHitTarget(Camera.main.transform.position, Camera.main.transform.forward, range);
 
         if (hit.collider != null)
-            SendHitInformation(hit, mousePos);
+            SendHitInformation(hit);
     }
     
-    private void SendHitInformation(RaycastHit hit, Vector3 mousePos)
+    private void SendHitInformation(RaycastHit hit)
     {
         switch(hit.collider.tag.ToLower())
         {
