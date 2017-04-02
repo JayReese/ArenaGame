@@ -13,7 +13,7 @@ public abstract class Projectile : MonoBehaviour
     protected void Start()
     {
         gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Speed, ForceMode.Impulse);
-    }
+    }   
 
     protected void FixedUpdate()
     {

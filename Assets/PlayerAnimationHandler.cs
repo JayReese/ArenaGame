@@ -2,18 +2,7 @@
 using System;
 using System.Collections;
 
-public class PlayerAnimationHandler : MonoBehaviour
+public class PlayerAnimationHandler
 {
-
-	// Use this for initialization
-	void Start ()
-    {
-        //Debug.Log(Enum.GetNames(typeof(KeyCode)).Length);
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	    
-	}
+    // To be implemented...
 }

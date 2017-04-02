@@ -6,7 +6,7 @@ using System;
 
 delegate void DisplayDamage(List<int> damagesDealt);
 
-public class UIManager : MonoBehaviour
+public class UIManager
 {
     [SerializeField] UIDisplay InterfaceDisplay;
     [SerializeField] Image StatDisplayRenderer;
@@ -15,30 +15,21 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     sbyte test;
 
-
-    // Use this for initialization
-    void Start()
+    public UIManager()
     {
         test = 4;
         InterfaceDisplay = GameObject.FindGameObjectWithTag("UI").GetComponent<UIDisplay>();
-        //StatDisplayRenderer = GameObject.FindGameObjectWithTag("UI.StatDisplayBoard").GetComponent<Image>();
-        //StatDisplayText = GameObject.FindGameObjectWithTag("UI.StatNumber").GetComponent<Text>();
-
-        //PreallocateDisplayColors();
-
-        //Debug.Log(StatDisplayColorMeanings["Neutral"]);
-
         Cursor.visible = false;
-    }
-
-    void Update()
-    {
-        //CorrectDisplayStat();
     }
 
     public void GiveDamageReport(RaycastHit hit, int damageDealt)
     {
         InterfaceDisplay.CreateDamageDisplay(new Vector3(hit.point.x + 30, hit.point.y + 30, 0), damageDealt);
+    }
+
+    public void GiveDamageReport(Collider c, int damageDealt)
+    {
+        InterfaceDisplay.CreateDamageDisplay(new Vector3(c.transform.position.x + 30, c.transform.position.y + 30, 0), damageDealt);
     }
 
     void CreateCrosshair()

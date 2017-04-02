@@ -5,7 +5,6 @@ using System;
 
 public static class DatabaseManager
 {
-    
     static string BaseDataPath = Application.dataPath;
 	
     // The primary 

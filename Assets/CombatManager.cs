@@ -1,32 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CombatManager : MonoBehaviour
+public class CombatManager
 {
-    UIManager InterfaceManager;
+    
     [SerializeField] int testReportedDamage = 500;
 
-	// Use this for initialization
-	void Start ()
+    public CombatManager()
     {
-        InterfaceManager = GetComponent<UIManager>();    
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-	    
-	}
+        
+    }
 
-    // For hitscan shots.
+    // For raycasted shots, with origin set at the camera.
     public void EvaluateShot(float range)
     {
-        //Vector3 mousePos = Input.mousePosition;
-        //RaycastHit hit = RaycastHitTarget(range);
         RaycastHit hit = NexusGlobals.RaycastHitTarget(Camera.main.transform.position, Camera.main.transform.forward, range);
 
         if (hit.collider != null)
             SendHitInformation(hit);
+    }
+
+    // For raycasted shots, implemeneted from an origin distinct from the camera.
+    public void EvaluateShot(float range, Transform originTransform)
+    {
+        RaycastHit hit = NexusGlobals.RaycastHitTarget(originTransform.position, originTransform.forward, range);
+
+        if (hit.collider != null)
+        {
+            SendHitInformation(hit);
+            MonoBehaviour.Destroy(originTransform.gameObject);
+        } 
+    }
+
+    public void EvaluateCollision(Collider c, Transform objectTransform)
+    {
+        SendHitInformation(c);
+        MonoBehaviour.Destroy(objectTransform.gameObject);
     }
     
     private void SendHitInformation(RaycastHit hit)
@@ -34,7 +43,17 @@ public class CombatManager : MonoBehaviour
         switch(hit.collider.tag.ToLower())
         {
             case "wall":
-                InterfaceManager.GiveDamageReport(hit, testReportedDamage);
+                ImplementationManagers.UIManagement.GiveDamageReport(hit, testReportedDamage);
+                break;
+        }
+    }
+
+    private void SendHitInformation(Collider hit)
+    {
+        switch (hit.tag.ToLower())
+        {
+            case "wall":
+                ImplementationManagers.UIManagement.GiveDamageReport(hit, testReportedDamage);
                 break;
         }
     }

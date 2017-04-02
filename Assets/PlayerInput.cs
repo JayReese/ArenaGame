@@ -4,8 +4,7 @@ using System;
 
 public class PlayerInput : MonoBehaviour
 {
-
-    CombatManager CombatManage;
+    //ImplementationManagerNexus IMNexus;
     PlayerMovement MovementReference;
     Player PlayerReference;
     ControlScheme Controls;
@@ -15,7 +14,8 @@ public class PlayerInput : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        CombatManage = GameObject.FindGameObjectWithTag("Managers").GetComponent<CombatManager>();
+        //CombatManage = GameObject.FindGameObjectWithTag("Managers").GetComponent<CombatManager>();
+        //IMNexus = new ImplementationManagerNexus();
         MovementReference = GetComponent<PlayerMovement>();
         PlayerReference = GetComponent<Player>();
 	}
@@ -47,7 +47,7 @@ public class PlayerInput : MonoBehaviour
     public void Fire()
     {
         if (Input.GetMouseButtonDown(0))
-            CombatManage.EvaluateShot(25);
+            ImplementationManagers.CombatManagement.EvaluateShot(25);
     }
 
     void BindMovementBooleans()

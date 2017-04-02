@@ -9,14 +9,11 @@ public class ProjectileNoGravity : Projectile
 
 	new void FixedUpdate()
     {
-        RaycastHit h = NexusGlobals.RaycastHitTarget(transform.position, transform.forward, 2f);
-
-        if (h.collider != null)
-            RegisterHit(h);
+        RegisterHit();
     }
 
-    void RegisterHit(RaycastHit hitinfo)
+    void RegisterHit()
     {
-
+        ImplementationManagers.CombatManagement.EvaluateShot(2, transform);
     }
 }
