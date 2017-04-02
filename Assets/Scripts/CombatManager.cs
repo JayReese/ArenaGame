@@ -28,7 +28,9 @@ public class CombatManager
         if (hit.collider != null)
         {
             SendHitInformation(hit);
-            MonoBehaviour.Destroy(originTransform.gameObject);
+            
+            if(originTransform.tag == "Projectile")
+                MonoBehaviour.Destroy(originTransform.gameObject);
         } 
     }
 
