@@ -3,7 +3,9 @@ using System.Collections;
 
 public class WeaponStats
 {
-    public int CurrentMagazineSize, MaxMagazineSize;
+    public FireType FiringType;
+    public TriggerType Trigger;
+    public int CurrentMagazineSize, MaxMagazineSize, Damage;
     public float FireRate, ReloadSpeed;
 
     public WeaponStats()
