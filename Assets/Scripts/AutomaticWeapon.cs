@@ -1,14 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AutomaticWeapon : Weapon
+public class AutomaticWeapon : WeaponInterface
 {
 
 	// Use this for initialization
 	new void Start ()
     {
-        FireType = FiringType.AUTO;
-
         base.Start();
     }
 	

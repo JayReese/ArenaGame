@@ -30,17 +30,22 @@ public static class DatabaseManager
             while (reader.Read())
             {
                 // Reads the XML node, and determines if it's an element and it isn't the root.
-                if(reader.NodeType == XmlNodeType.Element && ((type == DataQueryType.Abilities && reader.LocalName != "AbilityList") || (type == DataQueryType.Weapons && reader.LocalName != "WeaponList")))
+                /*if(reader.NodeType == XmlNodeType.Element && ((type == DataQueryType.Abilities && reader.LocalName != "AbilityList") || (type == DataQueryType.Weapons && reader.LocalName != "WeaponList")))
                 {
                     while (reader.GetAttribute("Name") != objectName && ((type == DataQueryType.Abilities && reader.ReadToNextSibling("Ability")) || (type == DataQueryType.Weapons && reader.ReadToNextSibling("Weapon"))))
                         continue;
-                
-                    // If it's anything else but the name, you must also have the category filled out.
-                    if(queryCategory != string.Empty)
+                */ // Reads the XML node, and determines if it's an element and it isn't the root.
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    if (reader.GetAttribute("Name") == objectName)
                     {
-                        // Reads to the next descendant.
-                        if(reader.ReadToDescendant(queryCategory))
-                            return RetrieveDataFromQueriesElement(reader, queryAttribute); // Returns the data retrieved from the search.
+                        // If it's anything else but the name, you must also have the category filled out.
+                        if (queryCategory != string.Empty)
+                        {
+                            // Reads to the next descendant.
+                            if (reader.ReadToDescendant(queryCategory))
+                                return RetrieveDataFromQueriesElement(reader, queryAttribute); // Returns the data retrieved from the search.
+                        }
                     }      
                 }   
             }

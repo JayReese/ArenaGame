@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ChargedWeapon : Weapon
+public class ChargedWeapon : WeaponInterface
 {
     [SerializeField] float ChargePercentage;
 
 	// Use this for initialization
 	new void Start ()
     {
-        FireType = FiringType.CHARGE;
-
         base.Start();
 	}
 	

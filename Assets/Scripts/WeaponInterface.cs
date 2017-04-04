@@ -2,10 +2,8 @@
 using System.Collections;
 using System;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class WeaponInterface : MonoBehaviour
 {
-    protected enum FiringType { NONE, SEMIAUTO, AUTO, CHARGE };
-    [SerializeField] protected FiringType FireType;
     [SerializeField] protected bool WeaponInUse, IsReloading, WeaponActive;
     [SerializeField] protected float NextFireTime, FireRateModifier;
     [SerializeField] protected WeaponStats Stats;
@@ -14,9 +12,9 @@ public abstract class Weapon : MonoBehaviour
 	// Use this for initialization
 	protected void Start ()
     {
-        Stats = new WeaponStats();
+        Stats = new WeaponStats(gameObject.name);
 
-        if (FireType == FiringType.CHARGE)
+        if (Stats.Trigger == TriggerType.Charge)
             FireRateModifier = 0.5f;
         else
             FireRateModifier = 1;
@@ -38,7 +36,7 @@ public abstract class Weapon : MonoBehaviour
     // Called every fixed timestep.
     protected void FixedUpdate ()
     {
-        if (FireType != FiringType.CHARGE)
+        if (Stats.Trigger != TriggerType.Charge)
             DecrementNextFire();
         else
             NextFireTime = 0;

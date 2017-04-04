@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SemiAutomaticWeapon : Weapon
+public class SemiAutomaticWeapon : WeaponInterface
 {
 	// Use this for initialization
 	new void Start ()
     {
-        FireType = FiringType.SEMIAUTO;
         WeaponInUse = true;
 
         base.Start();
