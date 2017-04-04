@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class CombatManager
 {
@@ -11,8 +12,31 @@ public class CombatManager
         
     }
 
+    public void OperateWeaponDischarge(FireType ft, GameObject g, float range = 0f)
+    {
+        if (ft == FireType.Hitscan)
+        {
+            if (range != 0)
+                EvaluateShot(range);
+            else
+                EvaluateShot(2f, g.transform);
+        }  
+        else
+            SpawnProjectile(g);
+    }
+
+    private void SpawnProjectile(GameObject g)
+    {
+        UnityEngine.Object.Instantiate( g.GetComponent<WeaponDetails>().Stats.TetheredProjectile, g.transform.FindChild("Emitter").position, Quaternion.identity );
+    }
+
+    public void ReportCollision(Collider c, Transform objectTrans)
+    {
+        EvaluateCollision(c, objectTrans);
+    }
+
     // For raycasted shots, with origin set at the camera.
-    public void EvaluateShot(float range)
+    private void EvaluateShot(float range)
     {
         RaycastHit hit = NexusGlobals.RaycastHitTarget(Camera.main.transform.position, Camera.main.transform.forward, range);
 
@@ -20,8 +44,9 @@ public class CombatManager
             SendHitInformation(hit);
     }
 
+    
     // For raycasted shots, implemeneted from an origin distinct from the camera.
-    public void EvaluateShot(float range, Transform originTransform)
+    private void EvaluateShot(float range, Transform originTransform)
     {
         RaycastHit hit = NexusGlobals.RaycastHitTarget(originTransform.position, originTransform.forward, range);
 
@@ -34,7 +59,7 @@ public class CombatManager
         } 
     }
 
-    public void EvaluateCollision(Collider c, Transform objectTransform)
+    private void EvaluateCollision(Collider c, Transform objectTransform)
     {
         SendHitInformation(c);
         MonoBehaviour.Destroy(objectTransform.gameObject);
@@ -58,15 +83,5 @@ public class CombatManager
                 ImplementationManagers.UIManagement.GiveDamageReport(hit, testReportedDamage);
                 break;
         }
-    }
-
-    private RaycastHit RaycastHitTarget(float range)
-    {
-        RaycastHit hit;
-
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range))
-            return hit;
-
-        return hit;
     }
 }

@@ -14,7 +14,7 @@ public class ChargedWeapon : WeaponInterface
 	// Update is called once per frame
 	new void Update ()
     {
-        WeaponInUse = Input.GetMouseButtonUp(0);
+        WeaponInUse = Input.GetMouseButtonUp((int)ControlScheme.PrimaryFire);
 
         if (Input.GetMouseButton(0) && ChargePercentage < 1)
             ChargePercentage += Time.deltaTime * Details.Stats.FireRate;

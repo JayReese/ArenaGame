@@ -14,5 +14,7 @@ public class ImplementationManagers
         CombatManagement = new CombatManager();
         CharacterManagement = new CharacterManager();
         PlayerAnimationHandling = new PlayerAnimationHandler();
+
+        ControlScheme.PopulateControlScheme();
     }
 }

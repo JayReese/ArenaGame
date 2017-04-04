@@ -13,7 +13,7 @@ public class AutomaticWeapon : WeaponInterface
 	// Update is called once per frame
 	new void Update ()
     {
-        WeaponInUse = Input.GetMouseButton(0);
+        WeaponInUse = Input.GetMouseButton((int)ControlScheme.PrimaryFire);
         base.Update();
     }
 }

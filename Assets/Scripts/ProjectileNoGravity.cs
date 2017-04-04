@@ -14,6 +14,6 @@ public class ProjectileNoGravity : Projectile
 
     void RegisterHit()
     {
-        ImplementationManagers.CombatManagement.EvaluateShot(2, transform);
+        ImplementationManagers.CombatManagement.OperateWeaponDischarge(FireType.Hitscan, transform.gameObject, 2f);
     }
 }

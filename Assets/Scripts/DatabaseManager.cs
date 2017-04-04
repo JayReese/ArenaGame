@@ -7,7 +7,6 @@ public static class DatabaseManager
 {
     static string BaseDataPath = Application.dataPath;
 	
-    // The primary 
     public static object ReturnQueriedData(DataQueryType type, string objectName, string queryAttr, string queryCateg)
     {
         return GetXMLData(type, objectName, queryAttr, queryCateg);
@@ -30,11 +29,6 @@ public static class DatabaseManager
             while (reader.Read())
             {
                 // Reads the XML node, and determines if it's an element and it isn't the root.
-                /*if(reader.NodeType == XmlNodeType.Element && ((type == DataQueryType.Abilities && reader.LocalName != "AbilityList") || (type == DataQueryType.Weapons && reader.LocalName != "WeaponList")))
-                {
-                    while (reader.GetAttribute("Name") != objectName && ((type == DataQueryType.Abilities && reader.ReadToNextSibling("Ability")) || (type == DataQueryType.Weapons && reader.ReadToNextSibling("Weapon"))))
-                        continue;
-                */ // Reads the XML node, and determines if it's an element and it isn't the root.
                 if (reader.NodeType == XmlNodeType.Element)
                 {
                     if (reader.GetAttribute("Name") == objectName)

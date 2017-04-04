@@ -14,7 +14,12 @@ public class SemiAutomaticWeapon : WeaponInterface
     // Update is called once per frame
     new void Update()
     {
-        WeaponInUse = Input.GetMouseButtonDown(0);
+        WeaponInUse = Input.GetMouseButtonDown((int)ControlScheme.PrimaryFire);
         base.Update();
+    }
+
+    new void FixedUpdate()
+    {
+        base.FixedUpdate();
     }
 }

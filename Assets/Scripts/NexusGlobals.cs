@@ -28,6 +28,4 @@ public static class NexusGlobals
 
         return hit;
     }
-
-    
 }

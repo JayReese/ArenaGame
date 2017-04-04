@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Weapons>
   <Weapon Name="Test Launcher">
-    <Utility FireType="2" TriggerType="1" />
+    <Utility FireType="2" TriggerType="1" Projectiles="Test Regular Projectile" />
     <Visuals  />
 
     <Stats MagazineSize="6"
-           ReloadSpeed="2.0" FireRate="0.9"
+           ReloadSpeed="2.0" FireRate="0.9" EffectiveRange="50.0"
            Damage="120" />
   </Weapon>
 </Weapons>

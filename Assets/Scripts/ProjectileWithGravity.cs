@@ -15,6 +15,6 @@ public class ProjectileWithGravity : Projectile
     void OnTriggerEnter(Collider col)
     {
         if (col)
-            ImplementationManagers.CombatManagement.EvaluateCollision(col, transform);
+            ImplementationManagers.CombatManagement.ReportCollision(col, RootObject);
     }
 }

@@ -8,13 +8,13 @@ public class WeaponDetails : MonoBehaviour
     void Awake()
     {
         Stats = new WeaponStats(gameObject.name);
-        //ImplementationManagers.CharacterManagement
+        
     }
 
 	// Use this for initialization
 	void Start ()
     {
-        
+        ImplementationManagers.CharacterManagement.AssignWeaponInterface( gameObject );
     }
 	
 	// Update is called once per frame

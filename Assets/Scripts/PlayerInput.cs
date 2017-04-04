@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
     //ImplementationManagerNexus IMNexus;
     PlayerMovement MovementReference;
     Player PlayerReference;
-    ControlScheme Controls;
 
     bool AbilityUse;
 
@@ -29,25 +28,41 @@ public class PlayerInput : MonoBehaviour
         CreateAxisOrientation();
 
         // Maintains combat parameters.
-        Fire();
-        UseAbility();
+        ExecuteCombatActions();
+        
+        //UseAbility();
     }
 
+    // DEFUNCT FOR AT LEAST A BIT.
     private void UseAbility()
     {
         if(AbilityUse)
             Instantiate(PlayerReference.TestAbility, PlayerReference.AbilityProjectileEmitter.transform.position, Quaternion.identity);
     }
 
+    // DEFUNCT FOR AT LEAST A BIT. MAY BE USED WHEN I NEED EQUIPMENT TO WORK.
     private void BindCombatBooleans()
     {
-        AbilityUse = Input.GetKeyDown(KeyCode.Q);
+        //AbilityUse = Input.GetKeyDown(KeyCode.Q);
     }
 
-    public void Fire()
+    void ExecuteCombatActions()
     {
-        if (Input.GetMouseButtonDown(0))
-            ImplementationManagers.CombatManagement.EvaluateShot(25);
+        PrimaryFire();
+        ManualReload();
+    }
+
+    // The primary fire method.
+    void PrimaryFire()
+    {
+        if(PlayerReference.ActiveWeapon.GetComponent<WeaponInterface>().WeaponInUse)
+            PlayerReference.ActiveWeapon.GetComponent<WeaponInterface>().Use();
+    }
+
+    void ManualReload()
+    {
+        if (Input.GetKeyDown((KeyCode)ControlScheme.Reload))
+            PlayerReference.ActiveWeapon.GetComponent<WeaponInterface>().Reload();
     }
 
     void BindMovementBooleans()

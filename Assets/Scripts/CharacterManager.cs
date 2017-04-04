@@ -47,7 +47,7 @@ public class CharacterManager
         player.AddComponent<PlayerInput>();
     }
 
-    public static void AssignWeaponInterface(GameObject wep)
+    public void AssignWeaponInterface(GameObject wep)
     {
         switch(wep.GetComponent<WeaponDetails>().Stats.Trigger)
         {

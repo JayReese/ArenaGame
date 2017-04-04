@@ -4,7 +4,9 @@ using System;
 
 public abstract class WeaponInterface : MonoBehaviour
 {
-    [SerializeField] protected bool WeaponInUse, IsReloading, WeaponActive;
+    [SerializeField]
+    public bool WeaponInUse { get; protected set; }
+    [SerializeField] protected bool IsReloading;
     [SerializeField] protected float NextFireTime, FireRateModifier;
     [SerializeField] protected Transform PlayerTransform;
     [SerializeField] protected WeaponDetails Details;
@@ -27,10 +29,8 @@ public abstract class WeaponInterface : MonoBehaviour
 	// Update is called once per frame
 	protected void Update ()
     {
-        if (WeaponInUse && NextFireTime <= 0 && !IsReloading && WeaponActive)
-            Use();
         if ((Details.Stats.CurrentMagazineSize == 0 || Input.GetKeyDown(KeyCode.R)) && Details.Stats.CurrentMagazineSize < Details.Stats.MaxMagazineSize && !IsReloading)
-            StartCoroutine(Reload());
+            Reload();
     }
 
     // Called every fixed timestep.
@@ -40,14 +40,16 @@ public abstract class WeaponInterface : MonoBehaviour
             DecrementNextFire();
         else
             NextFireTime = 0;
-
-        transform.RotateAround(PlayerTransform.position, transform.up, 10);
     }
 
-    void Use ()
-    {
-        PerformWeaponOperations();
-        RefreshNextFire();
+    public void Use ()
+    {   
+        if (NextFireTime <= 0 && !IsReloading)
+        {
+            Debug.Log("called");
+            PerformWeaponOperations();
+            RefreshNextFire();
+        }
     }
 
     void DecrementNextFire ()
@@ -58,15 +60,17 @@ public abstract class WeaponInterface : MonoBehaviour
 
     void RefreshNextFire() { NextFireTime = 1; }
 
-    void PerformWeaponOperations ()
+    void PerformWeaponOperations()
     {
+        ImplementationManagers.CombatManagement.OperateWeaponDischarge( Details.Stats.FiringType, gameObject, Details.Stats.EffectiveRange );
+
         if (Details.Stats.CurrentMagazineSize != 0)
             Details.Stats.CurrentMagazineSize--;
-
-        Debug.Log(string.Format("Current Magazine: {0}", Details.Stats.CurrentMagazineSize));
     }
 
-    private IEnumerator Reload ()
+    public void Reload() { StartCoroutine(PerformReload()); }
+
+    private IEnumerator PerformReload ()
     {
         IsReloading = true;
 

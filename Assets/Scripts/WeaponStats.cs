@@ -9,6 +9,8 @@ public class WeaponStats
     public FireType FiringType { get; private set; }
     public TriggerType Trigger { get; private set; }
 
+    public GameObject TetheredProjectile { get; private set; }
+
     public int CurrentMagazineSize;
     public int MaxMagazineSize { get; private set; }
 
@@ -17,11 +19,15 @@ public class WeaponStats
     public float FireRate { get; private set; }
     public float FireRateModifier { get; private set; }
 
+    public float EffectiveRange { get; private set; }
+
     public float ReloadSpeed { get; private set; }
 
     public WeaponStats(string name)
     {
         WeaponName = name;
+
+        TetheredProjectile = Resources.Load("Prefabs/" + DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "Projectiles", "Utility").ToString()) as GameObject;
 
         FiringType = (FireType)Convert.ToInt32(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "FireType", "Utility"));
         Trigger = (TriggerType)Convert.ToInt32(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "TriggerType", "Utility"));
@@ -32,10 +38,15 @@ public class WeaponStats
 
         FireRate = Convert.ToSingle(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "FireRate", "Stats"));
         ReloadSpeed = Convert.ToSingle(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "ReloadSpeed", "Stats"));
+
+        EffectiveRange = Convert.ToSingle(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "EffectiveRange", "Stats"));
     }
 
-    void Report()
+    float GiveFireRateModifier()
     {
-        Debug.Log(string.Format("{0}: {1}", WeaponName, FireRate));
+        if(Trigger == TriggerType.Charge)
+           return 0.5f;
+
+        return 1.0f;
     }
 }
