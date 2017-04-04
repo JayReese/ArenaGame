@@ -15,6 +15,8 @@ public class WeaponStats
     public int Damage { get; private set; }
 
     public float FireRate { get; private set; }
+    public float FireRateModifier { get; private set; }
+
     public float ReloadSpeed { get; private set; }
 
     public WeaponStats(string name)
@@ -28,8 +30,8 @@ public class WeaponStats
 
         CurrentMagazineSize = MaxMagazineSize;
 
-        FireRate = (float)DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "FireRate", "Stats");
-        ReloadSpeed = (float)DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "ReloadSpeed", "Stats");
+        FireRate = Convert.ToSingle(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "FireRate", "Stats"));
+        ReloadSpeed = Convert.ToSingle(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "ReloadSpeed", "Stats"));
     }
 
     void Report()

@@ -6,15 +6,15 @@ public abstract class WeaponInterface : MonoBehaviour
 {
     [SerializeField] protected bool WeaponInUse, IsReloading, WeaponActive;
     [SerializeField] protected float NextFireTime, FireRateModifier;
-    [SerializeField] protected WeaponStats Stats;
     [SerializeField] protected Transform PlayerTransform;
+    [SerializeField] protected WeaponDetails Details;
 
 	// Use this for initialization
 	protected void Start ()
     {
-        Stats = new WeaponStats(gameObject.name);
+        Details = GetComponent<WeaponDetails>();
 
-        if (Stats.Trigger == TriggerType.Charge)
+        if (Details.Stats.Trigger == TriggerType.Charge)
             FireRateModifier = 0.5f;
         else
             FireRateModifier = 1;
@@ -29,14 +29,14 @@ public abstract class WeaponInterface : MonoBehaviour
     {
         if (WeaponInUse && NextFireTime <= 0 && !IsReloading && WeaponActive)
             Use();
-        if ((Stats.CurrentMagazineSize == 0 || Input.GetKeyDown(KeyCode.R)) && Stats.CurrentMagazineSize < Stats.MaxMagazineSize && !IsReloading)
+        if ((Details.Stats.CurrentMagazineSize == 0 || Input.GetKeyDown(KeyCode.R)) && Details.Stats.CurrentMagazineSize < Details.Stats.MaxMagazineSize && !IsReloading)
             StartCoroutine(Reload());
     }
 
     // Called every fixed timestep.
     protected void FixedUpdate ()
     {
-        if (Stats.Trigger != TriggerType.Charge)
+        if (Details.Stats.Trigger != TriggerType.Charge)
             DecrementNextFire();
         else
             NextFireTime = 0;
@@ -53,25 +53,25 @@ public abstract class WeaponInterface : MonoBehaviour
     void DecrementNextFire ()
     {
         if (NextFireTime > 0)
-            NextFireTime -= Time.fixedDeltaTime * Stats.FireRate;
+            NextFireTime -= Time.fixedDeltaTime * Details.Stats.FireRate;
     }
 
     void RefreshNextFire() { NextFireTime = 1; }
 
     void PerformWeaponOperations ()
     {
-        if (Stats.CurrentMagazineSize != 0)
-            Stats.CurrentMagazineSize--;
+        if (Details.Stats.CurrentMagazineSize != 0)
+            Details.Stats.CurrentMagazineSize--;
 
-        Debug.Log(string.Format("Current Magazine: {0}", Stats.CurrentMagazineSize));
+        Debug.Log(string.Format("Current Magazine: {0}", Details.Stats.CurrentMagazineSize));
     }
 
     private IEnumerator Reload ()
     {
         IsReloading = true;
 
-        yield return new WaitForSeconds(1.0f);     
-        Stats.CurrentMagazineSize = Stats.MaxMagazineSize;
+        yield return new WaitForSeconds(1.0f);
+        Details.Stats.CurrentMagazineSize = Details.Stats.MaxMagazineSize;
 
         IsReloading = false;
     }

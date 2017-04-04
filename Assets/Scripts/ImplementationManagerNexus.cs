@@ -12,7 +12,7 @@ public class ImplementationManagers
     {
         UIManagement = new UIManager();
         CombatManagement = new CombatManager();
-        //CharacterManagement = new CharacterManager();
+        CharacterManagement = new CharacterManager();
         PlayerAnimationHandling = new PlayerAnimationHandler();
     }
 }

@@ -2,20 +2,21 @@
 using System.Collections;
 using System;
 
-public class CharacterManager : MonoBehaviour
+public class CharacterManager
 {
 
     [SerializeField] bool PlayersSpawned;
     [SerializeField] GameObject[] Players;
     AbilityExecution AbilityExecutor;
 
-	// Use this for initialization
-	void Start ()
+    public CharacterManager()
     {
         Players = GameObject.FindGameObjectsWithTag("Player");
 
-        //Debug.Log(DatabaseManager.ReturnQueriedData(DataQueryType.Abilities, "Test Ability", "Strength", "Stats").ToString());
-	}
+        if (!PlayersSpawned)
+            SpawnPlayer();
+
+    }
 
     private void SpawnPlayer()
     {
@@ -27,13 +28,6 @@ public class CharacterManager : MonoBehaviour
             
         PlayersSpawned = true;
     }
-
-    // Update is called once per frame
-    void Update ()
-    {
-        if (!PlayersSpawned)
-            SpawnPlayer();
-	}
 
     void CorrectCharacter(GameObject player, int query)
     {
@@ -51,6 +45,22 @@ public class CharacterManager : MonoBehaviour
     private void AssignCharacterInput(GameObject player)
     {
         player.AddComponent<PlayerInput>();
+    }
+
+    public static void AssignWeaponInterface(GameObject wep)
+    {
+        switch(wep.GetComponent<WeaponDetails>().Stats.Trigger)
+        {
+            case TriggerType.Auto:
+                wep.AddComponent<AutomaticWeapon>();
+                break;
+            case TriggerType.SemiAuto:
+                wep.AddComponent<SemiAutomaticWeapon>();
+                break;
+            case TriggerType.Charge:
+                wep.AddComponent<ChargedWeapon>();
+                break;
+        }
     }
 
     private void AssignCharacterMovement(GameObject player)

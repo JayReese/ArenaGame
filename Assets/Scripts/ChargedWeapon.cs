@@ -17,7 +17,7 @@ public class ChargedWeapon : WeaponInterface
         WeaponInUse = Input.GetMouseButtonUp(0);
 
         if (Input.GetMouseButton(0) && ChargePercentage < 1)
-            ChargePercentage += Time.deltaTime * Stats.FireRate;
+            ChargePercentage += Time.deltaTime * Details.Stats.FireRate;
 
         base.Update();
 
