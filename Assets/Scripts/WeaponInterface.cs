@@ -61,7 +61,7 @@ public abstract class WeaponInterface : MonoBehaviour
 
     void PerformWeaponOperations()
     {
-        ImplementationManagers.CombatManagement.OperateWeaponDischarge( Details.Stats.FiringType, gameObject, Details.Stats.EffectiveRange );
+        ImplementationManagers.CombatManagement.OperateWeaponDischarge( gameObject, Details.Stats );
 
         if (Details.Stats.CurrentMagazineSize != 0)
             Details.Stats.CurrentMagazineSize--;

@@ -33,8 +33,9 @@ public class WeaponStats
         Trigger = (TriggerType)Convert.ToInt32(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "TriggerType", "Utility"));
 
         MaxMagazineSize = Convert.ToInt32(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "MagazineSize", "Stats"));
-
         CurrentMagazineSize = MaxMagazineSize;
+
+        Damage = Convert.ToInt32(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "Damage", "Stats"));
 
         FireRate = Convert.ToSingle(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "FireRate", "Stats"));
         ReloadSpeed = Convert.ToSingle(DatabaseManager.ReturnQueriedData(DataQueryType.Weapons, WeaponName, "ReloadSpeed", "Stats"));

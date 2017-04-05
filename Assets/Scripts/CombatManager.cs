@@ -6,18 +6,23 @@ public class CombatManager
 {
     
     [SerializeField] int testReportedDamage = 500;
+    [SerializeField] WeaponStats StatsToReference;
+
 
     public CombatManager()
     {
         
     }
 
-    public void OperateWeaponDischarge(FireType ft, GameObject g, float range = 0f)
+    public void OperateWeaponDischarge(GameObject g, WeaponStats wepStats)
     {
-        if (ft == FireType.Hitscan)
+        float range = wepStats.FiringType == FireType.Hitscan ? wepStats.EffectiveRange : 0f;
+        StatsToReference = wepStats;
+
+        if (wepStats.FiringType == FireType.Hitscan)
         {
             if (range != 0)
-                EvaluateShot(range, g.GetComponent<WeaponDetails>().);
+                EvaluateShot(range);
             else
                 EvaluateShot(2f, g.transform);
         }  
@@ -25,27 +30,27 @@ public class CombatManager
             SpawnProjectile(g);
     }
 
-    public void DestroyExtantPhysicsObject(GameObject g)
+    public void SetExtantPhysicsObjectInactive(GameObject g)
     {
         Debug.Log("Visual effect goes here.");
-        MonoBehaviour.Destroy(g);
+        g.SetActive(false);
     }
 
     private void SpawnProjectile(GameObject g)
     {
-        GameObject proj = g.GetComponent<WeaponDetails>().Stats.TetheredProjectile;
-        proj.GetComponent<Projectile>().RootObject = g.transform;
-
-        UnityEngine.Object.Instantiate( proj, g.transform.FindChild("Emitter").position, Quaternion.identity );
+        g.GetComponent<WeaponDetails>().AmmoPool.GetChild(StatsToReference.CurrentMagazineSize - 1).gameObject.SetActive(true);
     }
 
-    public void ReportCollision(Collider c, GameObject currentObj, Transform objectTrans)
+    // Gets the collider, the current object that checked for the collision, and the root object that the projectile came from.
+    public void ReportCollision(Collider c, GameObject currentObj, Transform rootTransOrigin)
     {
-        EvaluateCollision(c, objectTrans, currentObj);
+        //EvaluateCollision(c, objectTrans, currentObj);
+
+        EvaluateCollision(c, currentObj, rootTransOrigin.gameObject);
     }
 
     // For raycasted shots, with origin set at the camera.
-    private void EvaluateShot(float range, WeaponStats g)
+    private void EvaluateShot(float range)
     {
         RaycastHit hit = NexusGlobals.RaycastHitTarget(Camera.main.transform.position, Camera.main.transform.forward, range);
 
@@ -64,15 +69,14 @@ public class CombatManager
             SendHitInformation(hit);
 
             if (originTransform.tag == "Projectile")
-                DestroyExtantPhysicsObject(originTransform.gameObject);
+                SetExtantPhysicsObjectInactive(originTransform.gameObject);
         } 
     }
 
-    private void EvaluateCollision(Collider c, Transform objectTransform, GameObject rootObj)
+    private void EvaluateCollision(Collider c, GameObject evaluatedProjectile, GameObject rootObj)
     {
-        Debug.Log("Collision happens");
         SendHitInformation(c);
-        DestroyExtantPhysicsObject(objectTransform.gameObject);
+        SetExtantPhysicsObjectInactive(evaluatedProjectile);
     }
     
     private void SendHitInformation(RaycastHit hit)
@@ -80,7 +84,7 @@ public class CombatManager
         switch(hit.collider.tag.ToLower())
         {
             case "wall":
-                ImplementationManagers.UIManagement.GiveDamageReport(hit, testReportedDamage);
+                ImplementationManagers.UIManagement.GiveDamageReport(hit, StatsToReference.Damage);
                 break;
         }
     }
@@ -90,7 +94,7 @@ public class CombatManager
         switch (hit.tag.ToLower())
         {
             case "wall":
-                ImplementationManagers.UIManagement.GiveDamageReport(hit, testReportedDamage);
+                ImplementationManagers.UIManagement.GiveDamageReport(hit, StatsToReference.Damage);
                 break;
         }
     }

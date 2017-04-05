@@ -14,17 +14,30 @@ public abstract class Projectile : MonoBehaviour
 
     protected void Start()
     {
+        
+        transform.position = RootObject.FindChild("Emitter").position;
+
         // Looks to center of screen.
         transform.LookAt(Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 100)));
 
-        gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * Speed, ForceMode.Impulse);
-    }   
+        gameObject.GetComponent<Rigidbody>().AddForce( transform.forward * Speed, ForceMode.Impulse );
+    }
+
+    protected void OnEnable()
+    {
+        transform.parent = null;
+    }
+
+    protected void OnDisable()
+    {
+        transform.parent = RootObject;
+    }
         
     protected void FixedUpdate()
     {
         Lifetime -= Time.fixedDeltaTime;
 
         if (Lifetime <= 0)
-            ImplementationManagers.CombatManagement.DestroyExtantPhysicsObject(gameObject);
+            ImplementationManagers.CombatManagement.SetExtantPhysicsObjectInactive(gameObject);
     }
 }

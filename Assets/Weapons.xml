@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Weapons>
   <Weapon Name="Test Launcher">
-    <Utility FireType="2" TriggerType="1" Projectiles="Test Gravity Projectile" />
+    <Utility FireType="2" TriggerType="1" Projectiles="Test Regular Projectile" />
     <Visuals  />
 
     <Stats MagazineSize="6"
