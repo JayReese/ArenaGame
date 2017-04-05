@@ -14,10 +14,15 @@ public enum AbilityTarget { Self = 1, Enemy };
 public enum TriggerType { SemiAuto = 1, Auto, Charge };
 public enum FireType { Hitscan = 1, Projectile };
 
+/*
+ * PUBLIC DELEGATES
+ */
+
 //public enum EffectOperation { AOE = 1, EnemyStagger };
 
 public static class NexusGlobals
 {
+
     // Multipurpose raycasting code.
     public static RaycastHit RaycastHitTarget(Vector3 origin, Vector3 direction, float range)
     {

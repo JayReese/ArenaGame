@@ -17,7 +17,7 @@ public class CombatManager
         if (ft == FireType.Hitscan)
         {
             if (range != 0)
-                EvaluateShot(range);
+                EvaluateShot(range, g.GetComponent<WeaponDetails>().);
             else
                 EvaluateShot(2f, g.transform);
         }  
@@ -25,18 +25,27 @@ public class CombatManager
             SpawnProjectile(g);
     }
 
-    private void SpawnProjectile(GameObject g)
+    public void DestroyExtantPhysicsObject(GameObject g)
     {
-        UnityEngine.Object.Instantiate( g.GetComponent<WeaponDetails>().Stats.TetheredProjectile, g.transform.FindChild("Emitter").position, Quaternion.identity );
+        Debug.Log("Visual effect goes here.");
+        MonoBehaviour.Destroy(g);
     }
 
-    public void ReportCollision(Collider c, Transform objectTrans)
+    private void SpawnProjectile(GameObject g)
     {
-        EvaluateCollision(c, objectTrans);
+        GameObject proj = g.GetComponent<WeaponDetails>().Stats.TetheredProjectile;
+        proj.GetComponent<Projectile>().RootObject = g.transform;
+
+        UnityEngine.Object.Instantiate( proj, g.transform.FindChild("Emitter").position, Quaternion.identity );
+    }
+
+    public void ReportCollision(Collider c, GameObject currentObj, Transform objectTrans)
+    {
+        EvaluateCollision(c, objectTrans, currentObj);
     }
 
     // For raycasted shots, with origin set at the camera.
-    private void EvaluateShot(float range)
+    private void EvaluateShot(float range, WeaponStats g)
     {
         RaycastHit hit = NexusGlobals.RaycastHitTarget(Camera.main.transform.position, Camera.main.transform.forward, range);
 
@@ -53,16 +62,17 @@ public class CombatManager
         if (hit.collider != null)
         {
             SendHitInformation(hit);
-            
-            if(originTransform.tag == "Projectile")
-                MonoBehaviour.Destroy(originTransform.gameObject);
+
+            if (originTransform.tag == "Projectile")
+                DestroyExtantPhysicsObject(originTransform.gameObject);
         } 
     }
 
-    private void EvaluateCollision(Collider c, Transform objectTransform)
+    private void EvaluateCollision(Collider c, Transform objectTransform, GameObject rootObj)
     {
+        Debug.Log("Collision happens");
         SendHitInformation(c);
-        MonoBehaviour.Destroy(objectTransform.gameObject);
+        DestroyExtantPhysicsObject(objectTransform.gameObject);
     }
     
     private void SendHitInformation(RaycastHit hit)

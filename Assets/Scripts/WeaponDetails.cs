@@ -8,7 +8,6 @@ public class WeaponDetails : MonoBehaviour
     void Awake()
     {
         Stats = new WeaponStats(gameObject.name);
-        
     }
 
 	// Use this for initialization

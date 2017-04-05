@@ -46,7 +46,6 @@ public abstract class WeaponInterface : MonoBehaviour
     {   
         if (NextFireTime <= 0 && !IsReloading)
         {
-            Debug.Log("called");
             PerformWeaponOperations();
             RefreshNextFire();
         }

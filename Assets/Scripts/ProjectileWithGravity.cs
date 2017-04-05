@@ -7,14 +7,11 @@ public class ProjectileWithGravity : Projectile
 {
 	new void Start() { base.Start(); }
 
-    new void FixedUpdate()
-    {
-        
-    }
+    new void FixedUpdate() { base.FixedUpdate(); }
 
     void OnTriggerEnter(Collider col)
     {
         if (col)
-            ImplementationManagers.CombatManagement.ReportCollision(col, RootObject);
+            ImplementationManagers.CombatManagement.ReportCollision(col, gameObject, RootObject);
     }
 }

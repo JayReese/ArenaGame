@@ -10,10 +10,11 @@ public class ProjectileNoGravity : Projectile
 	new void FixedUpdate()
     {
         RegisterHit();
+        base.FixedUpdate();
     }
 
     void RegisterHit()
     {
-        ImplementationManagers.CombatManagement.OperateWeaponDischarge(FireType.Hitscan, transform.gameObject, 2f);
+        ImplementationManagers.CombatManagement.OperateWeaponDischarge(FireType.Hitscan, transform.gameObject);
     }
 }
